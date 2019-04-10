@@ -1,0 +1,33 @@
+/var/log/nginx/access.log {
+        create 0644 root root
+        daily
+        missingok
+        rotate 30
+        dateext
+        dateformat -%Y-%m-%d
+        extension .log
+        sharedscripts
+        postrotate
+            if [ -s /var/run/nginx.pid ]; then
+              kill -USR1 `cat /var/run/nginx.pid`
+            fi
+        endscript
+        su root root
+}
+
+/var/log/nginx/error.log {
+        create 0644 root root
+        daily
+        missingok
+        rotate 30
+        dateext
+        dateformat -%Y-%m-%d
+        extension .log
+        sharedscripts
+        postrotate
+            if [ -s /var/run/nginx.pid ]; then
+              kill -USR1 `cat /var/run/nginx.pid`
+            fi
+        endscript
+        su root root
+}
